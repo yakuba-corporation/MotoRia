@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="uk">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#090a0d">
+	<meta name="description" content="MotoRia — електромотоцикли для відкритої дороги. Відкрийте для себе новий стандарт їзди.">
+	<title>MotoRia — електромотоцикли нового покоління</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: dark;
+			--ink: #f4f4f2;
+			--muted: #92949a;
+			--surface: #111216;
+			--surface-raised: #17181d;
+			--line: rgba(255, 255, 255, .09);
+			--red: #f02024;
+			--red-deep: #c91419;
+			--page: #090a0d;
+			font-family: 'DM Sans', sans-serif;
+			background: var(--page);
+			color: var(--ink);
+			scroll-behavior: smooth;
+		}
+
+		*, *::before, *::after { box-sizing: border-box; }
+		body { margin: 0; min-width: 320px; background: var(--page); }
+		a { color: inherit; text-decoration: none; }
+		button { font: inherit; }
+		.shell { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+
+		.utility-bar {
+			height: 38px;
+			border-bottom: 1px solid var(--line);
+			background: #0d0e12;
+			color: #aaaeb5;
+			font-size: 10px;
+		}
+		.utility-inner, .utility-links, .utility-actions { display: flex; align-items: center; }
+		.utility-inner { height: 100%; justify-content: space-between; }
+		.utility-links { gap: 24px; }
+		.utility-links a:hover, .nav-links a:hover, .footer-links a:hover { color: var(--ink); }
+		.utility-actions { gap: 10px; }
+		.login-link { padding: 7px 12px; border: 1px solid var(--line); border-radius: 20px; }
+		.utility-cta { padding: 8px 14px; border-radius: 20px; background: var(--red); color: white; font-weight: 700; }
+
+		.main-nav { height: 72px; border-bottom: 1px solid var(--line); background: rgba(9, 10, 13, .94); }
+		.nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+		.brand { display: inline-flex; align-items: center; gap: 10px; }
+		.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 11px; background: var(--red); color: white; font-family: 'Manrope', sans-serif; font-size: 17px; font-weight: 800; box-shadow: 0 5px 20px rgba(240, 32, 36, .25); }
+		.brand-copy { display: grid; gap: 1px; }
+		.brand-name { font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 800; }
+		.brand-tagline { color: var(--muted); font-size: 9px; }
+		.nav-links { display: flex; align-items: center; gap: 32px; color: #c4c5c9; font-size: 12px; }
+		.nav-actions { display: flex; align-items: center; gap: 10px; }
+		.icon-button, .language-button { min-width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
+		.icon-button { font-size: 15px; }
+		.language-button { width: auto; padding-inline: 12px; border-radius: 20px; font-size: 10px; }
+
+		.hero { min-height: 590px; position: relative; overflow: hidden; isolation: isolate; border-bottom: 1px solid rgba(255,255,255,.035); }
+		.hero::before { content: ''; position: absolute; z-index: -2; inset: 0; background: radial-gradient(ellipse at 67% 52%, rgba(49, 53, 61, .34), transparent 45%), linear-gradient(90deg, #090a0d 0%, rgba(9,10,13,.98) 27%, rgba(9,10,13,.22) 68%, #090a0d 100%); }
+		.hero::after { content: ''; position: absolute; z-index: -1; inset: auto 0 0; height: 36%; background: linear-gradient(0deg, #090a0d, transparent); pointer-events: none; }
+		.hero-inner { min-height: 590px; display: grid; grid-template-columns: minmax(370px, .95fr) minmax(0, 1.05fr); align-items: center; position: relative; }
+		.hero-copy { position: relative; z-index: 2; padding-block: 64px; animation: rise-in .65s ease-out both; }
+		.eyebrow { width: fit-content; display: flex; align-items: center; gap: 8px; margin-bottom: 23px; padding: 7px 12px; border: 1px solid var(--line); border-radius: 30px; background: rgba(255,255,255,.045); color: #d9dade; font-size: 10px; }
+		.eyebrow-mark { color: var(--red); font-size: 13px; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 620px; margin-bottom: 19px; font-family: 'Manrope', sans-serif; font-size: clamp(43px, 5.2vw, 70px); font-weight: 800; line-height: .99; letter-spacing: 0; }
+		h1 span { color: #9b9da3; }
+		.hero-description { max-width: 460px; margin-bottom: 24px; color: #a7a9af; font-size: 14px; line-height: 1.7; }
+		.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+		.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid transparent; border-radius: 24px; font-size: 11px; font-weight: 700; transition: background .2s ease, transform .2s ease, border-color .2s ease; }
+		.button:hover { transform: translateY(-2px); }
+		.button-primary { background: var(--red); color: white; }
+		.button-primary:hover { background: var(--red-deep); }
+		.button-quiet { border-color: var(--line); background: rgba(12,13,17,.64); color: #e9e9e9; }
+		.button-quiet:hover { border-color: rgba(255,255,255,.28); }
+		.spec-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
+		.spec { min-width: 104px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.055); }
+		.spec-label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; }
+		.spec strong { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800; }
+
+		.hero-visual { position: absolute; z-index: 0; top: 50%; left: 40%; width: 67%; transform: translateY(-50%); pointer-events: none; }
+		.bike-image { display: block; width: 100%; height: 490px; object-fit: contain; object-position: center; filter: brightness(.76) contrast(1.12) saturate(.82) drop-shadow(0 30px 45px rgba(0,0,0,.8)); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 14%, #000 86%, transparent 100%); }
+		.product-card { position: absolute; z-index: 2; right: 0; top: 50%; width: 248px; padding: 20px; transform: translateY(-38%); border: 1px solid rgba(255,255,255,.1); border-radius: 15px; background: rgba(20,21,25,.91); box-shadow: 0 18px 55px rgba(0,0,0,.35); backdrop-filter: blur(16px); }
+		.product-kicker { margin-bottom: 7px; color: var(--muted); font-size: 10px; }
+		.product-card h2 { margin-bottom: 8px; font-family: 'Manrope', sans-serif; font-size: 21px; font-weight: 800; }
+		.product-card p { margin-bottom: 12px; color: #a5a7ac; font-size: 10px; line-height: 1.55; }
+		.product-price { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+		.product-price strong { font-family: 'Manrope', sans-serif; font-size: 17px; }
+		.product-price span { color: var(--muted); font-size: 9px; }
+		.product-card .button { width: 100%; min-height: 38px; font-size: 10px; }
+		.delivery-note { margin: 10px 0 0 !important; text-align: center; font-size: 9px !important; }
+
+		.benefits { padding: 42px 0 36px; }
+		.benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+		.benefit { min-height: 126px; padding: 18px 20px; border: 1px solid rgba(255,255,255,.055); border-radius: 12px; background: var(--surface); }
+		.benefit-icon { width: 30px; height: 30px; display: grid; place-items: center; margin-bottom: 12px; border-radius: 9px; background: rgba(240,32,36,.15); color: #ff5559; font-size: 15px; }
+		.benefit h3 { margin-bottom: 5px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800; }
+		.benefit p { max-width: 300px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+
+		.why { padding: 15px 0 76px; }
+		.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+		.section-heading h2 { margin-bottom: 7px; font-family: 'Manrope', sans-serif; font-size: 30px; font-weight: 800; }
+		.section-heading p { max-width: 560px; margin-bottom: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+		.text-link { flex: 0 0 auto; color: #f66; font-size: 11px; font-weight: 700; }
+		.text-link span { margin-left: 7px; }
+
+		.test-ride { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #101115; }
+		.test-ride-inner { min-height: 130px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+		.test-ride h2 { margin-bottom: 7px; font-family: 'Manrope', sans-serif; font-size: 24px; font-weight: 800; }
+		.test-ride p { margin: 0; color: var(--muted); font-size: 11px; }
+		.footer { padding: 27px 0 24px; color: var(--muted); font-size: 10px; }
+		.footer-inner { display: flex; align-items: start; justify-content: space-between; gap: 36px; }
+		.footer-about { max-width: 300px; }
+		.footer-about strong { display: block; margin-bottom: 7px; color: var(--ink); font-family: 'Manrope', sans-serif; font-size: 13px; }
+		.footer-about p { margin-bottom: 15px; line-height: 1.6; }
+		.footer-links { display: flex; gap: 55px; }
+		.footer-column { display: grid; align-content: start; gap: 8px; }
+		.footer-column strong { margin-bottom: 2px; color: var(--ink); font-size: 10px; }
+		.copyright { margin: 18px 0 0; font-size: 9px; }
+
+		@keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+		@media (min-width: 1400px) { .hero, .hero-inner { min-height: 650px; } .bike-image { height: 550px; } }
+		@media (max-width: 900px) {
+			.shell { width: min(100% - 40px, 700px); }
+			.utility-links { gap: 14px; }
+			.nav-links { gap: 19px; }
+			.hero, .hero-inner { min-height: 620px; }
+			.hero-inner { grid-template-columns: minmax(330px, .9fr) minmax(0, 1.1fr); }
+			.hero-visual { left: 35%; width: 78%; }
+			.bike-image { height: 430px; }
+			.product-card { top: auto; right: 0; bottom: 28px; width: 220px; transform: none; }
+			.hero-copy { padding-bottom: 150px; }
+		}
+		@media (max-width: 640px) {
+			.shell { width: calc(100% - 36px); }
+			.utility-bar { height: 34px; }
+			.utility-links { display: none; }
+			.main-nav { height: 64px; }
+			.brand-mark { width: 31px; height: 31px; }
+			.nav-links { display: none; }
+			.nav-actions { gap: 7px; }
+			.icon-button { min-width: 31px; height: 31px; }
+			.hero, .hero-inner { min-height: 760px; }
+			.hero-inner { display: block; }
+			.hero::before { background: radial-gradient(ellipse at 58% 68%, rgba(55,57,64,.38), transparent 48%), linear-gradient(180deg, #090a0d 0%, rgba(9,10,13,.97) 37%, rgba(9,10,13,.28) 70%, #090a0d 100%); }
+			.hero-copy { padding: 46px 0 0; }
+			.eyebrow { margin-bottom: 18px; }
+			h1 { max-width: 480px; font-size: clamp(42px, 12vw, 58px); }
+			.hero-description { max-width: 440px; font-size: 12px; }
+			.hero-visual { top: 45%; left: 3%; width: 112%; transform: translateY(-5%); }
+			.bike-image { height: 360px; }
+			.product-card { right: 0; bottom: 22px; width: min(100%, 282px); padding: 15px; }
+			.product-card h2 { font-size: 18px; }
+			.product-card p { display: none; }
+			.product-price { margin: 8px 0 10px; }
+			.spec-list { gap: 7px; margin-top: 16px; }
+			.spec { min-width: 0; padding: 9px 10px; }
+			.spec-label { font-size: 8px; }
+			.spec strong { font-size: 11px; }
+			.benefits { padding: 24px 0 30px; }
+			.benefit-grid { grid-template-columns: 1fr; gap: 9px; }
+			.benefit { min-height: 0; display: grid; grid-template-columns: 31px 1fr; column-gap: 12px; padding: 14px; }
+			.benefit-icon { grid-row: span 2; margin: 0; }
+			.benefit h3 { margin: 1px 0 4px; }
+			.why { padding: 8px 0 45px; }
+			.section-heading { display: block; }
+			.section-heading h2 { font-size: 25px; }
+			.text-link { display: inline-block; margin-top: 12px; }
+			.test-ride-inner { min-height: 160px; align-items: start; flex-direction: column; justify-content: center; gap: 15px; }
+			.test-ride h2 { font-size: 21px; }
+			.footer-inner { flex-direction: column; gap: 22px; }
+			.footer-links { width: 100%; justify-content: space-between; gap: 18px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+		}
+	</style>
+</head>
+<body>
+	<div class="utility-bar">
+		<div class="shell utility-inner">
+			<a class="brand" href="#top" aria-label="MotoRia, на головну">
+				<span class="brand-mark">M</span>
+				<span class="brand-copy"><span class="brand-name">MotoRia</span><span class="brand-tagline">Рухайся по-своєму</span></span>
+			</a>
+			<nav class="utility-links" aria-label="Додаткова навігація">
+				<a href="#models">Моделі</a><a href="#why">Технології</a><a href="#why">Досвід</a><a href="#footer">Підтримка</a>
+			</nav>
+			<div class="utility-actions"><a class="login-link" href="#footer">Увійти</a><a class="utility-cta" href="#test-ride">Записатись на тест-драйв</a></div>
+		</div>
+	</div>
+
+	<header class="main-nav" id="top">
+		<div class="shell nav-inner">
+			<a class="brand" href="#top" aria-label="MotoRia, на головну">
+				<span class="brand-mark">M</span>
+				<span class="brand-copy"><span class="brand-name">MotoRia</span><span class="brand-tagline">Електромотоцикли нового покоління</span></span>
+			</a>
+			<nav class="nav-links" aria-label="Головна навігація">
+				<a href="#models">Моделі</a><a href="#why">Для купівлі</a><a href="#why">Сервіс</a><a href="#footer">Про нас</a>
+			</nav>
+			<div class="nav-actions"><button class="icon-button" type="button" aria-label="Пошук">⌕</button><a class="icon-button" href="#models" aria-label="Переглянути моделі">⌂</a><button class="language-button" type="button" aria-label="Мова: українська">UA⌄</button></div>
+		</div>
+	</header>
+
+	<main>
+		<section class="hero" id="models" aria-labelledby="hero-title">
+			<div class="shell hero-inner">
+				<div class="hero-copy">
+					<div class="eyebrow"><span class="eyebrow-mark">◆</span> Electric. Performance. Pure.</div>
+					<h1 id="hero-title">Створені для відкритої дороги. <span>Розроблені для майбутнього.</span></h1>
+					<p class="hero-description">Дослідіть новий стандарт електромотоциклів — миттєвий крутний момент, нульові викиди та поїздка, яка відчувається живою.</p>
+					<div class="hero-actions"><a class="button button-primary" href="#models">Детальніше про моделі <span aria-hidden="true">→</span></a><a class="button button-quiet" href="#why"><span aria-hidden="true">▷</span> Подивитись історію</a></div>
+					<div class="spec-list" aria-label="Характеристики MotoRia S1">
+						<div class="spec"><span class="spec-label">Дальність</span><strong>До 320 км</strong></div>
+						<div class="spec"><span class="spec-label">0–100 км/год</span><strong>3,2 с</strong></div>
+						<div class="spec"><span class="spec-label">Зарядка</span><strong>20–80% за 20 хв</strong></div>
+					</div>
+				</div>
+				<div class="hero-visual" aria-hidden="true">
+					<img class="bike-image" src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&amp;fit=crop&amp;w=1500&amp;q=85" alt="">
+				</div>
+				<aside class="product-card" aria-label="Модель MotoRia S1">
+					<div class="product-kicker">Нова модель</div>
+					<h2>MotoRia S1</h2>
+					<p>Динамічний електромотоцикл для щоденної поїздки та трек-днів. Швидка зарядка, стильний дизайн та безшумна потужність.</p>
+					<div class="product-price"><strong>від 299 990 ₴</strong><span>у наявності</span></div>
+					<a class="button button-primary" href="#test-ride">Конфігурувати <span aria-hidden="true">↗</span></a>
+					<p class="delivery-note">Доставка по Україні · Тест-драйв у Києві · Гарантія 2 роки</p>
+				</aside>
+			</div>
+		</section>
+
+		<section class="benefits shell" aria-label="Переваги MotoRia">
+			<div class="benefit-grid">
+				<article class="benefit"><span class="benefit-icon" aria-hidden="true">ϟ</span><h3>Миттєвий крутний момент</h3><p>Електродвигун реагує миттєво — 100% тяги з першого оберту, без пауз і перемикань.</p></article>
+				<article class="benefit"><span class="benefit-icon" aria-hidden="true">↯</span><h3>Швидка зарядка</h3><p>20–80% за 20 хвилин — заряджайтеся на перерві і продовжуйте дорогу.</p></article>
+				<article class="benefit"><span class="benefit-icon" aria-hidden="true">◈</span><h3>Нульові викиди</h3><p>Чистіша подорож містом та довшими маршрутами — без шуму, без вихлопу.</p></article>
+			</div>
+		</section>
+
+		<section class="why shell" id="why">
+			<div class="section-heading"><div><h2>Чому вибирати MotoRia</h2><p>Швидка зарядка, безшумна поїздка та сучасний дизайн — все для тих, хто хоче їхати краще.</p></div><a class="text-link" href="#test-ride">Відчути різницю <span aria-hidden="true">→</span></a></div>
+		</section>
+
+		<section class="test-ride" id="test-ride">
+			<div class="shell test-ride-inner"><div><h2>Готові до тест-драйву?</h2><p>Заповніть форму — ми зателефонуємо і домовимося про час та місце тест-драйву в Києві.</p></div><a class="button button-primary" href="mailto:ride@motoria.ua?subject=Запис%20на%20тест-драйв">Записатись на тест-драйв <span aria-hidden="true">→</span></a></div>
+		</section>
+	</main>
+
+	<footer class="footer" id="footer">
+		<div class="shell footer-inner">
+			<div class="footer-about"><strong>MotoRia</strong><p>Електромотоцикли для тих, хто хоче їхати краще. Драйв, технології та відповідальне майбутнє.</p><a href="mailto:hello@motoria.ua">hello@motoria.ua</a><p class="copyright">© 2026 MotoRia. Всі права захищені.</p></div>
+			<div class="footer-links"><nav class="footer-column" aria-label="Компанія"><strong>Компанія</strong><a href="#footer">Про нас</a><a href="#models">Моделі</a><a href="#test-ride">Де купити</a></nav><nav class="footer-column" aria-label="Підтримка"><strong>Підтримка</strong><a href="#footer">Сервіс</a><a href="#footer">Гарантія</a><a href="mailto:hello@motoria.ua">Контакти</a></nav></div>
+		</div>
+	</footer>
+</body>
+</html>
